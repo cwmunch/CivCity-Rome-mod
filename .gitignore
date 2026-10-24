@@ -1,0 +1,9 @@
+# Build output
+build/
+dist/
+release/
+
+# Third-party binaries are fetched by package.ps1 from the official release
+third_party/dxvk-*/d3d9.dll
+
+*.log

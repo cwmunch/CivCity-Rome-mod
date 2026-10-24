@@ -1,0 +1,53 @@
+TITLE:
+Fix: crash on startup in Windows 10/11 + sharp 4:3 on widescreen/ultrawide (CivCityFix)
+
+SHORT DESCRIPTION (Steam "Description" field):
+Game closes ~10 seconds after pressing Play? Stretched on a widescreen monitor? CivCityFix fixes both with a one-click installer.
+
+GUIDE BODY (paste into a single section; Steam guide BBCode):
+
+[h1]What this fixes[/h1]
+[list]
+[*][b]The startup crash.[/b] On modern Windows and graphics drivers CivCity: Rome closes about ten seconds after you press [b]Play[/b]. CivCityFix runs the game's Direct3D 9 graphics through [url=https://github.com/doitsujin/dxvk]DXVK[/url] (Direct3D 9 to Vulkan), which avoids the crash.
+[*][b]The stretched picture.[/b] The game is shown as a sharp 4:3 picture at your monitor's full height, centered with black bars. It really renders at that resolution (e.g. 1920x1440 on a 1440p monitor), so it is not an upscaled 1024x768.
+[*][b]Fullscreen switching.[/b] The game runs in a borderless window, so your desktop resolution never changes and Alt+Tab is instant.
+[*][b]Vertical sync[/b], so the old renderer doesn't keep your graphics card at full load.
+[/list]
+
+[h1]Download[/h1]
+[url=https://github.com/cwmunch/CivCity-Rome-mod/releases/latest]Download the latest CivCityFix (zip) from GitHub[/url]
+
+The zip contains no game files. The source code of the fix is included and on [url=https://github.com/cwmunch/CivCity-Rome-mod]GitHub[/url].
+
+[h1]Install[/h1]
+[olist]
+[*]Close the game.
+[*]Unpack the zip anywhere, for example in your Downloads folder.
+[*]Double-click [b]Install.cmd[/b].
+[*]Start CivCity: Rome from Steam as usual.
+[/olist]
+
+The installer finds the game in your Steam library and picks 4:3 at your screen's full height:
+[list]
+[*]1080p monitor: 1440x1080
+[*]1440p monitor (also 3440x1440 ultrawide): 1920x1440
+[*]4K monitor: 2880x2160
+[/list]
+
+Want a different resolution? Open a command prompt in the unpacked folder and run for example [b]Install.cmd -Resolution 1600x1200[/b].
+
+[h1]Uninstall[/h1]
+Double-click [b]Uninstall.cmd[/b]. It removes everything the installer added and restores what was there before.
+[b]Uninstall.cmd -KeepDxvk[/b] keeps only the crash fix.
+
+[h1]Good to know[/h1]
+[list]
+[*]The game's own startup dialog ("CivCity Rome v1.1") can't show resolutions above 1600x1200 and would overwrite yours, so the installer turns it off for larger resolutions. The graphics options inside the game still work.
+[*]"No write access"? Right-click Install.cmd and choose [i]Run as administrator[/i].
+[*]You need a graphics card with Vulkan 1.3 and current drivers (most NVIDIA, AMD and Intel GPUs from the last ten years).
+[*]Tested on Windows 11 with an NVIDIA RTX 3070 on a 3440x1440 monitor. Reports from AMD, Intel and GOG players are very welcome in the comments or as a [url=https://github.com/cwmunch/CivCity-Rome-mod/issues]GitHub issue[/url]. Please include [b]CivCityFix.log[/b] and [b]CivCity Rome_d3d9.log[/b] from the game folder.
+[/list]
+
+[h1]Credits[/h1]
+DXVK by Philip Rebohle and contributors (zlib/libpng license).
+CivCityFix is an unofficial fan fix (MIT license), not affiliated with or endorsed by Firefly Studios, Firaxis Games or 2K.
